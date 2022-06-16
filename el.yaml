@@ -55,6 +55,19 @@ spec:
                 storage: 1Gi
 ---
 apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: nationalparks
+spec:
+  params:
+  - name: git-repo-url
+    value: $(body.repository.url)
+  - name: git-repo-name
+    value: $(body.repository.name)
+  - name: git-revision
+    value: $(body.head_commit.id)
+---
+apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
 metadata:
   name: nationalparks
@@ -69,6 +82,23 @@ spec:
       ref: nationalparks
     template:
       ref: nationalparks
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: Trigger
+metadata:
+  name: ratingsapp-trigger
+spec:
+  serviceAccountName: pipeline
+  interceptors:
+    - ref:
+        name: "github"
+      params:
+        name: "eventTypes"
+        value: ["push"]
+  bindings:
+    - ref: nationalparks
+  template:
+    ref: trigger-template-nationalparks-jsytvd
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
