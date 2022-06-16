@@ -1,0 +1,40 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  creationTimestamp: "2022-06-16T15:23:04Z"
+  labels:
+    app: workshop
+    app.kubernetes.io/component: nationalparks
+    app.kubernetes.io/instance: nationalparks
+    app.kubernetes.io/name: nationalparks
+    app.kubernetes.io/part-of: Triggers
+    component: nationalparks
+    role: backend
+  name: nationalparks
+  namespace: workshop
+  resourceVersion: "1443688"
+  uid: 1cee7fc2-d415-4bec-a972-655faa9da6f3
+spec:
+  host: nationalparks-workshop.apps.w6nc7s8x.eastus.aroapp.io
+  port:
+    targetPort: 8080-tcp
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: nationalparks
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: "2022-06-16T15:23:04Z"
+      status: "True"
+      type: Admitted
+    host: nationalparks-workshop.apps.w6nc7s8x.eastus.aroapp.io
+    routerCanonicalHostname: router-default.apps.w6nc7s8x.eastus.aroapp.io
+    routerName: default
+    wildcardPolicy: None

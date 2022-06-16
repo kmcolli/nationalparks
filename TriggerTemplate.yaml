@@ -1,0 +1,59 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  creationTimestamp: "2022-06-16T15:23:04Z"
+  generation: 1
+  name: trigger-template-nationalparks-jsytvd
+  namespace: workshop
+  resourceVersion: "1443617"
+  uid: 695f2938-be69-4235-a7ff-173034c221fb
+spec:
+  params:
+  - name: git-revision
+  - name: git-commit-message
+  - name: git-repo-url
+  - name: git-repo-name
+  - name: content-type
+  - name: pusher-name
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+      annotations:
+        pipeline.openshift.io/started-by: kevcolli@redhat.com
+      generateName: nationalparks-
+      labels:
+        app.kubernetes.io/instance: nationalparks
+        app.kubernetes.io/name: nationalparks
+        pipeline.openshift.io/strategy: docker
+        pipeline.openshift.io/type: kubernetes
+        tekton.dev/pipeline: nationalparks
+      namespace: workshop
+    spec:
+      params:
+      - name: APP_NAME
+        value: nationalparks
+      - name: GIT_REPO
+        value: https://github.com/kmcolli/nationalparks
+      - name: GIT_REVISION
+        value: master
+      - name: IMAGE_NAME
+        value: image-registry.openshift-image-registry.svc:5000/workshop/nationalparks
+      - name: PATH_CONTEXT
+        value: .
+      pipelineRef:
+        name: nationalparks
+      resources: []
+      status: null
+      workspaces:
+      - name: workspace
+        volumeClaimTemplate:
+          metadata:
+            labels:
+              tekton.dev/pipeline: nationalparks
+          spec:
+            accessModes:
+            - ReadWriteOnce
+            resources:
+              requests:
+                storage: 1Gi
