@@ -86,7 +86,7 @@ spec:
 apiVersion: triggers.tekton.dev/v1beta1
 kind: Trigger
 metadata:
-  name: ratingsapp-trigger
+  name: nationalparks
 spec:
   serviceAccountName: pipeline
   interceptors:
