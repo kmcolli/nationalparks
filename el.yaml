@@ -93,8 +93,8 @@ spec:
     - ref:
         name: "github"
       params:
-        name: "eventTypes"
-        value: ["push"]
+        - name: "eventTypes"
+          value: ["push"]
   bindings:
     - ref: nationalparks
   template:
