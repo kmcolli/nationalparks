@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
-  name: trigger-template-nationalparks-jsytvd
+  name: trigger-template-nationalparks
   namespace: workshop
 spec:
   params:
@@ -81,7 +81,7 @@ spec:
     - kind: TriggerBinding
       ref: nationalparks
     template:
-      ref: nationalparks
+      ref: trigger-template-nationalparks
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: Trigger
@@ -98,7 +98,7 @@ spec:
   bindings:
     - ref: nationalparks
   template:
-    ref: trigger-template-nationalparks-jsytvd
+    ref: trigger-template-nationalparks
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
