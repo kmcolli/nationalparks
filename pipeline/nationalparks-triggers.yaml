@@ -27,7 +27,7 @@ spec:
           - name: APP_GIT_REVISION
             value: $(tt.params.git-revision)
         pipelineRef:
-          name: nationalparks-pipeline
+          name: nationalparks-pipeline-kmc
         workspaces:
         - name: app-source
           persistentVolumeClaim:
