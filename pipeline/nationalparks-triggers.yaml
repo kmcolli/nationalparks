@@ -16,7 +16,7 @@ spec:
       kind: PipelineRun
       metadata:
         labels:
-          tekton.dev/pipeline: nationalparks-pipeline
+          tekton.dev/pipeline: nationalparks-pipeline-kmc
         name: nationalparks-deploy-$(uid)
       spec:
         params:
