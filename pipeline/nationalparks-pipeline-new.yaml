@@ -78,7 +78,7 @@ spec:
         - build-and-test
       taskRef:
         kind: ClusterTask
-        name: buildah
+        name: buildah-1-8-0
       workspaces:
         - name: source
           workspace: app-source
